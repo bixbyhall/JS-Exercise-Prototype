@@ -88,7 +88,18 @@ Person.prototype.toString = function() {
   Car.prototype.fill = function(gallons) {
     return this.tank += gallons;
   };
-  
+  Car.prototype.drive = function(distance) {
+    if (this.tank - (distance / this.milesPerGallon) > 0) {
+        return [this.odometer += distance, this.tank = this.tank - (distance / this.milesPerGallon),];
+    } else if (this.tank - (distance / this.milesPerGallon) <=0) {
+        this.odometer += (distance - (distance - this.tank * this.milesPerGallon));
+        return `I Ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
+  const truck = new Car('Tacoma', '23');
+  truck.fill(25);
+  truck.drive(15);
+  console.log(truck);
   /*
     TASK 3
       - Write a Baby constructor subclassing Person.
@@ -112,7 +123,7 @@ Baby.prototype.play = function() {
     1. Global Binding: When outside of any block, or function scope, the value of 'this' is the window/console Object;
     2. Implicit Binding: The 'this' keyword takes the context of the object that contains the 'this' keyword.
     3. New Binding: Whenever a constructor function is used, the 'this' keyword refers to the object being output by the constructor function.
-    4. 
+    4. Explicit Binding: the 'this' is explicitly defined when using the .call, .apply, or .bind method.
   */
   
   
